@@ -52,12 +52,7 @@ html {
   --mdc-elevated-card-container-shape: 8px !important;
   --mdc-elevated-card-container-elevation: 0px 0px 30px 0px rgba(82, 63, 105, 0.05) !important;
   --mat-expansion-container-shape:  8px !important;
-
-  --mat-dialog-actions-alignment: end !important;
- /*  --mat-dialog-actions-padding: 34px !important; */
- --mdc-dialog-subhead-size: 20px !important;
- --mdc-dialog-subhead-weight: 700 !important;
- --mdc-dialog-subhead-color: #000000cc !important;
+  
 
  --mat-expansion-header-text-size: 16px !important;
  --mat-expansion-header-text-weight: 700 !important;
@@ -122,11 +117,7 @@ html {
   --mat-tab-header-label-text-size: 16px !important;
   --mat-tab-header-label-text-weight: 700 !important;
 }
-.mat-mdc-dialog-actions {
-  padding: 13px !important;
-}
-
-
+ 
 
 body {
   font-family: var(--main-font), sans-serif; 
@@ -294,9 +285,7 @@ button{
   border-top: none !important;
 }
 
-.mat-mdc-dialog-surface {
-  border-radius: 4px !important;
-}
+ 
 
 .mat-mdc-form-field-error{
   display: flex !important;
@@ -391,14 +380,7 @@ th {
   border-bottom-right-radius: 9px !important;
 }
 
-
-
-.mat-mdc-dialog-container .mdc-dialog__title{
-  background-color: var(--primary) !important;
-  color: #ffffff !important;
-}
-
-
+ 
 .mat-filter input::placeholder {
   color: #999 !important; /* or any color you want */
   opacity: 1 !important;  /* override default opacity if needed */

@@ -1,6 +1,6 @@
-<h1 mat-dialog-title class="p-3">{{ dialogTitle }}</h1>
-<div mat-dialog-content>
-  <form [formGroup]="carForm" class="p-4 d-flex justify-content-start flex-wrap " style="gap: 12px;">
+<h2 mat-dialog-title >{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="carForm" class="d-flex justify-content-start flex-wrap " style="gap: 12px;">
 
     <mat-form-field class="w-100" appearance="outline">
       <mat-label>تفاصيل السيارة</mat-label>
@@ -28,14 +28,15 @@
 
     <mat-form-field class="w-100" appearance="outline">
       <mat-label>البائع</mat-label>
-      <input matInput formControlName="seller">
-      <mat-error *ngIf="carForm.get('seller')?.hasError('required')">البائع مطلوب</mat-error>
+      <textarea matInput formControlName="buyer" rows="4"></textarea>
+      <mat-error *ngIf="carForm.get('buyer')?.hasError('required')">البائع مطلوب</mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-100" appearance="outline">
       <mat-label>المشتري</mat-label>
-      <input matInput formControlName="buyer">
-      <mat-error *ngIf="carForm.get('buyer')?.hasError('required')">المشتري مطلوب</mat-error>
+      <textarea  matInput formControlName="seller" rows="4"></textarea>
+   
+      <mat-error *ngIf="carForm.get('seller')?.hasError('required')">المشتري مطلوب</mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-100" appearance="outline">
@@ -59,8 +60,10 @@
       <mat-datepicker  #picker></mat-datepicker>
     </mat-form-field> -->
   </form>
-</div>
-<div mat-dialog-actions class="p-3">
+</mat-dialog-content>
+ <mat-dialog-actions>
+
   <button mat-raised-button color="primary" [disabled]="carForm.invalid" (click)="onSave()">حفظ</button>
   <button mat-button (click)="onCancel()">إلغاء</button>
-</div>
+ </mat-dialog-actions>
+ 

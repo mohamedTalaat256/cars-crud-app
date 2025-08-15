@@ -19,7 +19,12 @@ import { environment } from '../environments/environment';
 import { CarFormDialogComponent } from './car-form-dialog/car-form-dialog.component';
 import {MatCalendarCellClassFunction, MatDatepickerModule} from '@angular/material/datepicker';
 import {provideNativeDateAdapter} from '@angular/material/core';
-
+import {
+  MatDialog, 
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+} from '@angular/material/dialog';
 @NgModule({
   declarations: [AppComponent, LoginComponent, CarsListComponent, CarFormDialogComponent],
   imports: [
@@ -32,7 +37,11 @@ import {provideNativeDateAdapter} from '@angular/material/core';
     MatPaginatorModule,
     MatTableModule,
     MatIconModule,
-    MatDatepickerModule,
+    MatDatepickerModule, 
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions
+
      
   ],
   providers: [ provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
