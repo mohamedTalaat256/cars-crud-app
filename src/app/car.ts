@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface Car {
   id?: string;
   car_details: string;
@@ -7,5 +9,5 @@ export interface Car {
   seller: string;
   national_id: string;
   status: string;
-  add_date: Date;
+  add_date: Timestamp;
 }

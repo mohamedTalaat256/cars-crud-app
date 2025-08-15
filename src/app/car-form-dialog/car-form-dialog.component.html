@@ -1,0 +1,52 @@
+<h1 mat-dialog-title class="p-3">{{ dialogTitle }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="carForm" class="p-4 d-flex justify-content-start flex-wrap " style="gap: 12px;">
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>تفاصيل السيارة</mat-label>
+      <input matInput formControlName="car_details">
+      <mat-error *ngIf="carForm.get('car_details')?.hasError('required')">تفاصيل السيارة مطلوبة</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>رقم السيارة</mat-label>
+      <input matInput formControlName="car_number">
+      <mat-error *ngIf="carForm.get('car_number')?.hasError('required')">رقم السيارة مطلوب</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>رقم المحرك</mat-label>
+      <input matInput formControlName="engin_number">
+      <mat-error *ngIf="carForm.get('engin_number')?.hasError('required')">رقم المحرك مطلوب</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>المشتري</mat-label>
+      <input matInput formControlName="buyer">
+      <mat-error *ngIf="carForm.get('buyer')?.hasError('required')">المشتري مطلوب</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>البائع</mat-label>
+      <input matInput formControlName="seller">
+      <mat-error *ngIf="carForm.get('seller')?.hasError('required')">البائع مطلوب</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>الرقم القومي</mat-label>
+      <input matInput formControlName="national_id">
+      <mat-error *ngIf="carForm.get('national_id')?.hasError('required')">الرقم القومي مطلوب</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>الحالة</mat-label>
+      <input matInput formControlName="status">
+      <mat-error *ngIf="carForm.get('status')?.hasError('required')">الحالة مطلوبة</mat-error>
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions class="p-3">
+  <button mat-raised-button color="primary" [disabled]="carForm.invalid" (click)="onSave()">حفظ</button>
+  <button mat-button (click)="onCancel()">إلغاء</button>
+</div>

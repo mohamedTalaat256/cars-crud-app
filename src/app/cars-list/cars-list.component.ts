@@ -5,14 +5,18 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { Timestamp } from 'firebase/firestore';
+import { CarFormDialogComponent } from '../car-form-dialog/car-form-dialog.component';
 
 @Component({
   selector: 'app-cars-list',
   templateUrl: './cars-list.component.html',
-  styleUrls: ['./cars-list.component.scss']
+  styleUrls: ['./cars-list.component.scss'],
+  standalone: false
 })
 export class CarsListComponent implements OnInit {
-  displayedColumns: string[] = ['car_number', 'buyer', 'seller', 'status', 'add_date', 'actions'];
+  displayedColumns: string[] = ['car_number', 'buyer', 
+    'seller', 'status', 'add_date', 'actions'];
   dataSource = new MatTableDataSource<Car>();
   carForm: FormGroup;
   isEditMode = false;
@@ -24,7 +28,8 @@ export class CarsListComponent implements OnInit {
   constructor(
     private carsService: CarsService,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    
   ) {
     this.carForm = this.fb.group({
       car_details: ['', Validators.required],
@@ -46,6 +51,7 @@ export class CarsListComponent implements OnInit {
     // the `lastVisible` token and subscribe to the observable.
     this.carsService.getCars().subscribe(cars => {
       this.dataSource.data = cars;
+      console.log(cars);
     });
   }
 
@@ -93,5 +99,52 @@ export class CarsListComponent implements OnInit {
     this.carForm.reset();
     this.isEditMode = false;
     this.editingCarId = null;
+  }
+
+ // A new method to open the dialog for adding a new car
+  openAddCarDialog(): void {
+    const dialogRef = this.dialog.open(CarFormDialogComponent, {
+      width: '400px',
+      data: { car: null } // No data for a new car
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Result contains the new car data from the dialog form
+        this.carsService.createCar(result).then(() => {
+          this.loadCars();
+        });
+      }
+    });
+  }
+
+  // A new method to open the dialog for editing an existing car
+  openEditCarDialog(car: Car): void {
+    const dialogRef = this.dialog.open(CarFormDialogComponent, {
+      width: '400px',
+      data: { car: car } // Pass the existing car data to the dialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Result contains the updated car data
+        this.carsService.updateCar({ ...result, id: car.id }).then(() => {
+          this.loadCars();
+        });
+      }
+    });
+  }
+
+  convertToArabicDate(timestamp: Timestamp): string {
+    const date = timestamp.toDate();
+    return date.toLocaleString('ar-EG', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZone: 'Africa/Cairo'
+    });
   }
 }
