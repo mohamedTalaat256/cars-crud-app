@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/cars-crud-app",
+    "public": "dist/cars-crud-app/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

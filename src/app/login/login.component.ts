@@ -9,7 +9,8 @@ import { AuthService } from '../auth.service';
   standalone: false
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+   loginForm: FormGroup;
+  loginError: string | null = null;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
@@ -18,10 +19,23 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+/*   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password);
+    }
+  } */
+
+
+async onSubmit() {
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.loginError = null;
+      try {
+        await this.authService.login(email, password);
+      } catch (err: any) {
+        this.loginError = err?.message || 'البريد الإلكتروني أو كلمة المرور غير صحيحة';
+      }
     }
   }
 }

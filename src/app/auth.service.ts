@@ -18,15 +18,15 @@ export class AuthService {
     });
   }
 
-  async login(email:string, password:string) {
-    try {
-      await signInWithEmailAndPassword(this.auth, email, password);
-      this.router.navigate(['/cars']);
-    } catch (error) {
-      console.error("Login failed:", error);
-      // Handle error (e.g., show a snackbar)
-    }
+async login(email: string, password: string) {
+  try {
+    await signInWithEmailAndPassword(this.auth, email, password);
+    this.router.navigate(['/cars']);
+  } catch (error) {
+    console.error("Login failed:", error);
+    throw error; // pass error to component
   }
+}
 
   async logout() {
     await signOut(this.auth);

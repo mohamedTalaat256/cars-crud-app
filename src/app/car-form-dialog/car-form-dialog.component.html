@@ -20,10 +20,10 @@
       <mat-error *ngIf="carForm.get('engin_number')?.hasError('required')">رقم المحرك مطلوب</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="w-100" appearance="outline">
-      <mat-label>المشتري</mat-label>
-      <input matInput formControlName="buyer">
-      <mat-error *ngIf="carForm.get('buyer')?.hasError('required')">المشتري مطلوب</mat-error>
+     <mat-form-field class="w-100" appearance="outline">
+      <mat-label>رقم الشاسيه</mat-label>
+      <input matInput formControlName="body_number">
+      <mat-error *ngIf="carForm.get('body_number')?.hasError('required')">رقم الشاسيه مطلوب</mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-100" appearance="outline">
@@ -33,9 +33,9 @@
     </mat-form-field>
 
     <mat-form-field class="w-100" appearance="outline">
-      <mat-label>الرقم القومي</mat-label>
-      <input matInput formControlName="national_id">
-      <mat-error *ngIf="carForm.get('national_id')?.hasError('required')">الرقم القومي مطلوب</mat-error>
+      <mat-label>المشتري</mat-label>
+      <input matInput formControlName="buyer">
+      <mat-error *ngIf="carForm.get('buyer')?.hasError('required')">المشتري مطلوب</mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-100" appearance="outline">
@@ -44,6 +44,20 @@
       <mat-error *ngIf="carForm.get('status')?.hasError('required')">الحالة مطلوبة</mat-error>
     </mat-form-field>
 
+
+      <mat-form-field class="w-100" appearance="outline">
+       <mat-label>تاريخ الاضافة</mat-label>
+      <input matInput formControlName="date_add">
+      <mat-error *ngIf="carForm.get('status')?.hasError('required')">التاريخ مطلوبة</mat-error>
+    </mat-form-field>
+
+
+   <!--  <mat-form-field class="w-100" appearance="outline">
+      <mat-label>تاريخ الاضافة</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date_add"> 
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker  #picker></mat-datepicker>
+    </mat-form-field> -->
   </form>
 </div>
 <div mat-dialog-actions class="p-3">

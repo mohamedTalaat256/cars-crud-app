@@ -26,8 +26,9 @@ export class CarFormDialogComponent implements OnInit {
       engin_number: ['', Validators.required],
       buyer: ['', Validators.required],
       seller: ['', Validators.required],
-      national_id: ['', Validators.required],
-      status: ['', Validators.required]
+      status: ['', Validators.required],
+      body_number: ['', Validators.required],
+      date_add: ['', Validators.required],
     });
   }
 

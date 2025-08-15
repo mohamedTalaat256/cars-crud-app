@@ -17,6 +17,9 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { CarFormDialogComponent } from './car-form-dialog/car-form-dialog.component';
+import {MatCalendarCellClassFunction, MatDatepickerModule} from '@angular/material/datepicker';
+import {provideNativeDateAdapter} from '@angular/material/core';
+
 @NgModule({
   declarations: [AppComponent, LoginComponent, CarsListComponent, CarFormDialogComponent],
   imports: [
@@ -29,11 +32,15 @@ import { CarFormDialogComponent } from './car-form-dialog/car-form-dialog.compon
     MatPaginatorModule,
     MatTableModule,
     MatIconModule,
-
+    MatDatepickerModule,
+     
   ],
   providers: [ provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth())],
+    provideAuth(() => getAuth()),
+    provideNativeDateAdapter()
+  ],
+    
   bootstrap: [AppComponent],
 })
 export class AppModule {}

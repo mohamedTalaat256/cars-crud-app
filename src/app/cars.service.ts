@@ -1,10 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, doc, addDoc, updateDoc, deleteDoc, query, orderBy, limit, startAfter } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  collectionData,
+  doc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  orderBy,
+  limit,
+  startAfter,
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Car } from './car';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CarsService {
   private carsCollection = collection(this.firestore, 'cars');
@@ -13,17 +25,14 @@ export class CarsService {
 
   // CREATE
   createCar(car: Omit<Car, 'id'>) {
-    return addDoc(this.carsCollection, { ...car, add_date: new Date() });
+    return addDoc(this.carsCollection, { ...car, auto_date: new Date() });
   }
+ 
+getCars( ): Observable<Car[]> {
+  let q = query(this.carsCollection, orderBy('auto_date', 'desc') );
 
-  // READ (with pagination and sorting)
-  getCars(pageSize: number = 10, lastVisible: any = null): Observable<Car[]> {
-    let q = query(this.carsCollection, orderBy('add_date', 'desc'), limit(pageSize));
-    if (lastVisible) {
-      q = query(this.carsCollection, orderBy('add_date', 'desc'), startAfter(lastVisible), limit(pageSize));
-    }
-    return collectionData(q, { idField: 'id' }) as Observable<Car[]>;
-  }
+  return collectionData(q, { idField: 'id' }) as Observable<Car[]>;
+}
 
   // READ ALL (for search, if needed)
   getAllCars(): Observable<Car[]> {
@@ -40,5 +49,15 @@ export class CarsService {
   deleteCar(id: string) {
     const carDoc = doc(this.firestore, `cars/${id}`);
     return deleteDoc(carDoc);
+  }
+
+  addCarsFromList(): Promise<any> {
+    const cars: Omit<any, 'id'>[] =  [];
+    const promises = cars.map((car) => {
+      // For each car in the list, create a new document
+      return addDoc(this.carsCollection, { ...car, auto_date: new Date() });
+    });
+    // Use Promise.all to wait for all additions to complete
+    return Promise.all(promises);
   }
 }

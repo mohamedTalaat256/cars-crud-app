@@ -1,23 +1,37 @@
-<div class="login-container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="fill">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email">
-          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
-          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password">
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100 justify-content-center">
+    <div class="col-md-6 col-lg-4 mt-4">
+      <mat-card class="p-4 shadow-sm">
+        <mat-card-header class="mb-3 text-center">
+          <mat-card-title class="w-100 fs-4 fw-bold">تسجيل الدخول</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <!-- Error alert -->
+          <div *ngIf="loginError" class="alert alert-danger py-2 mb-3">
+            {{ loginError }}
+          </div>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="d-grid gap-3">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>البريد الإلكتروني</mat-label>
+              <input matInput formControlName="email">
+              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">البريد الإلكتروني مطلوب</mat-error>
+              <mat-error *ngIf="loginForm.get('email')?.hasError('email')">الرجاء إدخال بريد صحيح</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-label>كلمة المرور</mat-label>
+              <input matInput type="password" formControlName="password">
+              <mat-error *ngIf="loginForm.get('password')?.hasError('required')">كلمة المرور مطلوبة</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" class="mt-5" [disabled]="loginForm.invalid">
+              تسجيل الدخول
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
