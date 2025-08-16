@@ -2,9 +2,9 @@
 <mat-dialog-content>
   <form [formGroup]="carForm" class="d-flex justify-content-start flex-wrap " style="gap: 12px;">
 
-    <mat-form-field class="w-100" appearance="outline">
+    <mat-form-field class="w-100 mt-5" appearance="outline">
       <mat-label>تفاصيل السيارة</mat-label>
-      <input matInput formControlName="car_details">
+      <textarea matInput formControlName="car_details" rows="4"></textarea>
       <mat-error *ngIf="carForm.get('car_details')?.hasError('required')">تفاصيل السيارة مطلوبة</mat-error>
     </mat-form-field>
 
